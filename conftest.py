@@ -1,4 +1,10 @@
+import os
+
 import pytest
+from dotenv import load_dotenv
+from github import Auth, Gist
+
+load_dotenv()
 
 
 class User:
@@ -23,3 +29,12 @@ def user(request):
     request.addfinalizer(lambda: user.remove())
 
     return user
+
+
+@pytest.fixture
+def github_api():
+    token = os.getenv("GITHUB_TOKEN")
+    auth = Auth.Token(token=token)
+    gist = Gist.__doc__
+
+    return gist

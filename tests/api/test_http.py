@@ -37,3 +37,8 @@ def test_current_user_repo():
     assert body["login"] == "lykhorovych"
     assert body["url"] == "https://api.github.com/users/lykhorovych"
     assert headers["Server"] == "GitHub.com"
+
+
+@pytest.mark.http
+def test_github(github_api):
+    print(github_api)
