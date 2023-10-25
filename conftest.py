@@ -35,8 +35,10 @@ def github_api():
     return api
 
 
-@pytest.fixture
-def database_api():
+@pytest.fixture(scope="class")
+def database_api(request):
     api = DataBase()
+
+    request.addfinalizer(api.close)
 
     return api

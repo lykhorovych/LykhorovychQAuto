@@ -68,3 +68,6 @@ class DataBase:
         self.cursor.execute(query)
         record = self.cursor.fetchall()
         return record
+
+    def close(self):
+        self.connection.close()
