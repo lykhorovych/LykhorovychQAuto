@@ -1,5 +1,6 @@
 import pytest
 from modules.ui.page_objects.amazon.amazon_start_page import AmazonStartPage
+from modules.ui.page_objects.rozetka.rozetka_basket_page import RozetkaBasketPage
 
 class User:
     def __init__(self) -> None:
@@ -36,6 +37,15 @@ def amazon_page(request):
 @pytest.fixture(scope='function')
 def amazon_page_login(request):
     page = AmazonStartPage()
+    page.open()
+
+    request.addfinalizer(page.close)
+
+    return page
+
+@pytest.fixture(scope='module')
+def rozetka_page(request):
+    page = RozetkaBasketPage()
     page.open()
 
     request.addfinalizer(page.close)
