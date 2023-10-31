@@ -79,28 +79,3 @@ class BasePage:
 
     def get_element_on_focus(self, element):
         self.driver.execute_script("arguments[0].focus();", element)
-
-    # def do_some_action(self, action, webelement):
-    #     act = ActionChains(self.driver)
-    #     actions = {
-    #         "double_click": act.double_click,
-    #         "right_click": act.context_click,
-    #     }
-    #     actions[action](webelement).perform()
-    #
-    # def action_right_click(self, webelement):
-    #     act = ActionChains(self.driver)
-    #     act.context_click(webelement).perform()
-    #
-    # def action_double_click(self, webelement):
-    #     act = ActionChains(self.driver)
-    #     act.double_click(webelement).perform()
-    #
-    # def switch_to_new_tab(self):
-    #     self.driver.switch_to.new_window("tab")
-    #
-    # def switch_to_new_window(self):
-    #     self.driver.switch_to.new_window("window")
-    #
-    # def switch_to_next_tab(self, tab_id):
-    #     self.driver.switch_to.window(tab_id)

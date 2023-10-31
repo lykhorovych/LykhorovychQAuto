@@ -121,5 +121,3 @@ class AmazonStartPage(BasePage):
     def count_elements_in_list(self):
         count_of_lists = self.elements_are_visible(MainPageLocators.SHOPPING_LISTS)
         return count_of_lists
-
-    def

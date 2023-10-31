@@ -4,19 +4,16 @@ import requests
 from config.config import BASE_DIR
 class TestAmazonStartPage:
 
-    @pytest.mark.skip
     @pytest.mark.new
     def test_open_start_page(self, amazon_page):
         amazon_page.check_title("Amazon.com. Spend less. Smile more.")
 
-    @pytest.mark.skip
     @pytest.mark.new
     def test_placeholder_search_field(self, amazon_page):
         placeholder = amazon_page.check_placeholder()
 
         assert placeholder == "Search Amazon"
 
-    @pytest.mark.skip
     @pytest.mark.new
     @pytest.mark.parametrize("status", [False, True])
     def test_search_with_all_department_selected(self, amazon_page, status):
@@ -31,7 +28,6 @@ class TestAmazonStartPage:
         assert typed_value == "iphone"
         amazon_page.check_title("Amazon.com : iphone")
 
-    @pytest.mark.skip
     @pytest.mark.new
     @pytest.mark.parametrize(
         "department, value, expected_title",
@@ -57,7 +53,6 @@ class TestAmazonStartPage:
 
         amazon_page.check_title(expected_title)
 
-    @pytest.mark.skip
     @pytest.mark.new
     def test_back_to_top_button(self, amazon_page):
         button = amazon_page.move_to_bottom_of_window()
@@ -67,7 +62,6 @@ class TestAmazonStartPage:
         amazon_page.driver.save_screenshot(
             BASE_DIR / "test_back_to_top_move_to_top.png")
 
-    @pytest.mark.skip
     @pytest.mark.new
     def test_color_of_button_go(self, amazon_page):
         color = amazon_page.get_button_go_color()
@@ -75,7 +69,6 @@ class TestAmazonStartPage:
 
         assert color == expected_color
 
-    @pytest.mark.skip
     @pytest.mark.new
     @pytest.mark.parametrize(
         "login, expected_heading, expected_message",
@@ -95,7 +88,6 @@ class TestAmazonStartPage:
         assert alert_heading == expected_heading
         assert alert_message == expected_message
 
-    @pytest.mark.skip
     @pytest.mark.new
     def test_log_in_with_empty_login(self, amazon_page_login, login="",
                                  expected_message="Enter your email or mobile phone number"):
@@ -143,7 +135,7 @@ class TestAmazonStartPage:
             "iphone", status=False
         )
 
-        assert typed_value == "iphone"
+        assert searched_product == "iphone"
         amazon_page.check_title("Amazon.com : iphone")
 
     def test_add_product_to_cart_list(self, amazon_page):
