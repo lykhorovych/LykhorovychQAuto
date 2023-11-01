@@ -1,6 +1,6 @@
 import pytest
 from modules.ui.page_objects.amazon.amazon_start_page import AmazonStartPage
-
+from modules.ui.page_objects.nova_poshta.nova_poshta_trecking_page import NovaPoshtaTrackingPage
 class User:
     def __init__(self) -> None:
         self.name = None
@@ -42,3 +42,12 @@ def amazon_page_login(request):
 
     return page
 
+
+@pytest.fixture
+def nova_poshta_page(request):
+    nova_poshta_page = NovaPoshtaTrackingPage()
+    nova_poshta_page.open()
+
+    request.addfinalizer(nova_poshta_page.close)
+
+    return nova_poshta_page
