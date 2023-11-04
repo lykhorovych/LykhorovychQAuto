@@ -1,6 +1,4 @@
 import pytest
-from icecream.icecream import ic
-from pprint import pprint
 
 
 @pytest.mark.api
