@@ -3,7 +3,6 @@ import pytest
 from modules.api.clients.github import GitHub
 from modules.common.database import DataBase
 
-
 class User:
     def __init__(self) -> None:
         self.name = None
@@ -35,7 +34,7 @@ def github_api():
     return api
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture
 def database_api(request):
     api = DataBase()
 
