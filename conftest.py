@@ -2,6 +2,9 @@ import pytest
 
 from modules.api.clients.github import GitHub
 from modules.common.database import DataBase
+from modules.ui.page_objects.amazon.amazon_start_page import AmazonStartPage
+from modules.ui.page_objects.rozetka.rozetka_basket_page import RozetkaBasketPage
+from modules.ui.page_objects.nova_poshta.nova_poshta_trecking_page import NovaPoshtaTrackingPage
 
 class User:
     def __init__(self) -> None:
@@ -26,13 +29,11 @@ def user(request):
 
     return user
 
-
 @pytest.fixture
 def github_api():
     api = GitHub()
 
     return api
-
 
 @pytest.fixture
 def database_api(request):
@@ -41,3 +42,39 @@ def database_api(request):
     request.addfinalizer(api.close)
 
     return api
+
+@pytest.fixture(scope='module')
+def amazon_page(request):
+    page = AmazonStartPage()
+    page.open()
+
+    request.addfinalizer(page.close)
+
+    return page
+
+@pytest.fixture(scope='function')
+def amazon_page_login(request):
+    page = AmazonStartPage()
+    page.open()
+
+    request.addfinalizer(page.close)
+
+    return page
+
+@pytest.fixture(scope='module')
+def rozetka_page(request):
+    page = RozetkaBasketPage()
+    page.open()
+
+    request.addfinalizer(page.close)
+
+    return page
+
+@pytest.fixture
+def nova_poshta_page(request):
+    page = NovaPoshtaTrackingPage()
+    page.open()
+
+    request.addfinalizer(page.close)
+
+    return page
