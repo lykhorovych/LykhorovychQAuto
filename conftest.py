@@ -1,6 +1,7 @@
 import pytest
 from modules.ui.page_objects.amazon.amazon_start_page import AmazonStartPage
 from modules.ui.page_objects.rozetka.rozetka_basket_page import RozetkaBasketPage
+from modules.ui.page_objects.nova_poshta.nova_poshta_trecking_page import NovaPoshtaTrackingPage
 
 class User:
     def __init__(self) -> None:
@@ -52,3 +53,11 @@ def rozetka_page(request):
 
     return page
 
+@pytest.fixture
+def nova_poshta_page(request):
+    page = NovaPoshtaTrackingPage()
+    page.open()
+
+    request.addfinalizer(page.close)
+
+    return page

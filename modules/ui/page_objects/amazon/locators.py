@@ -36,9 +36,21 @@ class MainPageLocators:
     CREATE_LIST_INNER_LINK = (By.CLASS_NAME, "a-button-input")
     CREATE_LIST_HEADER = (By.ID, "a-popover-header-1")
     CREATE_LIST_INPUT = (By.ID, "list-name")
-    CREATE_LIST_BUTTON = (By.XPATH, "//*[@id='wl-redesigned-create-list']//input")
+    CREATE_LIST_BUTTON = (By.CSS_SELECTOR, "#wl-redesigned-create-list > span > span > span")
     SHOPPING_LISTS = (By.CSS_SELECTOR, "#left-nav a")
 
     # SEARCH PAGE
     FIRST_RESULT = (By.CSS_SELECTOR, "img[data-image-index='1']")
     ADD_TO_LIST_BUTTON = (By.ID, "add-to-wishlist-button-submit")
+
+    # TEST LIST WISHLIST
+    LIST_NAME = (By.ID, "profile-list-name")
+    ELEM_IN_LIST = (By.CSS_SELECTOR, "#g-items li[class='a-spacing-none g-item-sortable']")
+    QUANTITY_LINK = (By.ID, "itemEditLabel_IVWIRKSRWY9LX")
+    COMMENT_TEXTAREA = (By.NAME, "itemComment")
+    NEEDS_INPUT = (By.NAME, "item-quantity-want")
+    HIGHEST_PRIORITY_LINK = (By.ID, "WLNOTES_Priority_4")
+    SAVE_BUTTON = (By.LINK_TEXT, "Save")
+    DELETE_BUTTON = (By.ID, "submit.deleteItem")
+    CREATE_LIST = (By.ID, "createList")
+    CONTINUE_SHOPPING = (By.LINK_TEXT, "Continue shopping")

@@ -8,7 +8,6 @@ from modules.ui.page_objects.base_page import BasePage
 from modules.ui.page_objects.amazon.locators import MainPageLocators
 from modules.common.readconfig import ReadConfig
 
-
 class AmazonStartPage(BasePage):
     URL = "https://www.amazon.com/ref=nav_bb_logo"
     LOGIN = ReadConfig.get_username()
@@ -97,27 +96,5 @@ class AmazonStartPage(BasePage):
     def open_account_and_lists_block(self):
         self.driver.execute_script("document.getElementById('nav-flyout-accountList').\
                                    style.display='block';")
-    
-    def get_list_of_links(self):
-        lists = self.elements_are_visible(MainPageLocators.LISTS_LINKS)
-        account_links = self.elements_are_visible(MainPageLocators.ACCOUNT_LINKS)
-        return lists + account_links        
 
-    def create_new_wishlist(self, list_name: str):
-        outer_link = self.element_is_clickable(MainPageLocators.CREATE_LIST_OUTER_LINK)
-        outer_link.click()
-        inner_link = self.element_is_clickable(MainPageLocators.CREATE_LIST_INNER_LINK)
-        inner_link.click()
-        header = self.element_is_visible(MainPageLocators.CREATE_LIST_HEADER).text
-        list_name_field = self.element_is_visible(MainPageLocators.CREATE_LIST_INPUT)
-        list_name_field.clear()
-        list_name_field.send_keys(list_name)
 
-        create_list_button = self.element_is_clickable(MainPageLocators.CREATE_LIST_BUTTON)
-        create_list_button.click()
-
-        return header
-
-    def count_elements_in_list(self):
-        count_of_lists = self.elements_are_visible(MainPageLocators.SHOPPING_LISTS)
-        return count_of_lists
