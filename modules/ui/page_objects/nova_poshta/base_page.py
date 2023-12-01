@@ -5,7 +5,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
-from config.config import BASE_DIR
+from modules.common.readconfig import ReadConfig
+
 
 class BasePage:
     def __init__(self) -> None:
@@ -21,7 +22,7 @@ class BasePage:
             )
             return element
         except (NoSuchElementException, TimeoutException):
-            self.driver.save_screenshot(BASE_DIR /
+            self.driver.save_screenshot(ReadConfig.get_base_dir() /
                                         f'screenshots/nova_poshta/{self.driver.current_url}.png')
             self.driver.quit()
 
@@ -32,7 +33,7 @@ class BasePage:
             )
             return elements
         except (NoSuchElementException, TimeoutException):
-            self.driver.save_screenshot(BASE_DIR /
+            self.driver.save_screenshot(ReadConfig.get_base_dir() /
                                         f'screenshots/nova_poshta/{self.driver.current_url}.png')
             self.driver.quit()
 
@@ -43,7 +44,7 @@ class BasePage:
             )
             return element
         except (NoSuchElementException, TimeoutException):
-            self.driver.save_screenshot(BASE_DIR /
+            self.driver.save_screenshot(ReadConfig.get_base_dir() /
                                         f'screenshots/nova_poshta/{self.driver.current_url}.png')
             self.driver.quit()
 
@@ -54,7 +55,7 @@ class BasePage:
             )
             return element
         except (NoSuchElementException, TimeoutException):
-            self.driver.save_screenshot(BASE_DIR /
+            self.driver.save_screenshot(ReadConfig.get_base_dir() /
                                         f'screenshots/nova_poshta/{self.driver.current_url}.png')
             self.driver.quit()
 
@@ -65,7 +66,7 @@ class BasePage:
             )
             return element
         except (NoSuchElementException, TimeoutException):
-            self.driver.save_screenshot(BASE_DIR /
+            self.driver.save_screenshot(ReadConfig.get_base_dir() /
                                         f'screenshots/nova_poshta/{self.driver.current_url}.png')
             self.driver.quit()
 
@@ -76,7 +77,7 @@ class BasePage:
             )
             return element
         except (NoSuchElementException, TimeoutException):
-            self.driver.save_screenshot(BASE_DIR /
+            self.driver.save_screenshot(ReadConfig.get_base_dir() /
                                         f'screenshots/nova_poshta/{self.driver.current_url}.png')
             self.driver.quit()
 

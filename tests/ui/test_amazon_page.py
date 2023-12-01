@@ -1,7 +1,11 @@
 import pytest
-import requests
 
-from config.config import BASE_DIR
+from modules.common.readconfig import ReadConfig
+
+
+BASE_DIR = ReadConfig.get_base_dir()
+
+
 class TestAmazonStartPage:
 
     @pytest.mark.amazon

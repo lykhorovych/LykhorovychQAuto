@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+
 class NovaPoshtaTrackingPageLocators:
 
     INPUT_FIELD = (By.ID, "en")

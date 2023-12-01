@@ -4,9 +4,10 @@ import requests
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
 
-from modules.ui.page_objects.base_page import BasePage
+from modules.ui.page_objects.amazon.base_page import BasePage
 from modules.ui.page_objects.amazon.locators import MainPageLocators
 from modules.common.readconfig import ReadConfig
+
 
 class AmazonStartPage(BasePage):
     URL = "https://www.amazon.com/ref=nav_bb_logo"

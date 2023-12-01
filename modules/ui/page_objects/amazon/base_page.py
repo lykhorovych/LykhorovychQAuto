@@ -4,8 +4,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-
-from config.config import BASE_DIR
+from modules.common.readconfig import ReadConfig
 
 
 class BasePage:
@@ -23,7 +22,7 @@ class BasePage:
             return element
         except (NoSuchElementException, TimeoutException):
             self.driver.save_screenshot(
-                BASE_DIR / f"screenshots/amazon/{self.driver.current_url}.png")
+                ReadConfig.get_base_dir() / f"screenshots/amazon/{self.driver.current_url}.png")
             self.driver.close()
 
     def elements_are_present(self, locator, timeout=10):
@@ -34,7 +33,7 @@ class BasePage:
             return elements
         except (NoSuchElementException, TimeoutException):
             self.driver.save_screenshot(
-                BASE_DIR / f"screenshots/amazon/{self.driver.current_url}.png")
+                ReadConfig.get_base_dir() / f"screenshots/amazon/{self.driver.current_url}.png")
             self.driver.close()
 
     def element_is_visible(self, locator, timeout=10):
@@ -45,7 +44,7 @@ class BasePage:
             return element
         except (NoSuchElementException, TimeoutException):
             self.driver.save_screenshot(
-                BASE_DIR / f"screenshots/amazon/{self.driver.current_url}.png")
+                ReadConfig.get_base_dir() / f"screenshots/amazon/{self.driver.current_url}.png")
             self.driver.close()
 
     def elements_are_visible(self, locator, timeout=10):
@@ -56,7 +55,7 @@ class BasePage:
             return element
         except (NoSuchElementException, TimeoutException):
             self.driver.save_screenshot(
-                BASE_DIR / f"screenshots/amazon/{self.driver.current_url}.png")
+                ReadConfig.get_base_dir() / f"screenshots/amazon/{self.driver.current_url}.png")
             self.driver.close()
 
     def element_is_not_visible(self, locator, timeout=5):
@@ -67,7 +66,7 @@ class BasePage:
             return element
         except (NoSuchElementException, TimeoutException):
             self.driver.save_screenshot(
-                BASE_DIR / f"screenshots/amazon/{self.driver.current_url}.png")
+                ReadConfig.get_base_dir() / f"screenshots/amazon/{self.driver.current_url}.png")
             self.driver.close()
 
     def element_is_clickable(self, locator, timeout=10):
@@ -78,7 +77,7 @@ class BasePage:
             return element
         except (NoSuchElementException, TimeoutException):
             self.driver.save_screenshot(
-                BASE_DIR / f"screenshots/amazon/{self.driver.current_url}.png")
+                ReadConfig.get_base_dir() / f"screenshots/amazon/{self.driver.current_url}.png")
             self.driver.close()
 
     def move_to_element(self, element):  #

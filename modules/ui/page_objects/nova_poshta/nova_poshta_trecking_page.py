@@ -2,6 +2,7 @@ from modules.ui.page_objects.nova_poshta.base_page import BasePage
 from modules.ui.page_objects.nova_poshta.locators import NovaPoshtaTrackingPageLocators
 from selenium.webdriver.common.keys import Keys
 
+
 class NovaPoshtaTrackingPage(BasePage):
     URL = "https://tracking.novaposhta.ua/#/uk"
 

@@ -1,9 +1,11 @@
 import sqlite3
-from config.config import BASE_DIR
+from modules.common.readconfig import ReadConfig
+
+
 class DataBase:
     def __init__(self) -> None:
         self.connection = sqlite3.connect(
-            BASE_DIR / 'become_qa_auto.db'
+            ReadConfig.get_base_dir() / 'become_qa_auto.db'
         )
         self.cursor = self.connection.cursor()
 

@@ -4,7 +4,10 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from selenium.webdriver.common.action_chains import ActionChains
+from modules.common.readconfig import ReadConfig
+
+
+BASE_DIR = ReadConfig.get_base_dir()
 
 
 class BasePage:
@@ -14,24 +17,26 @@ class BasePage:
     def close(self):
         self.driver.close()
 
-    def element_is_present(self, locator, timeout=5):
+    def element_is_present(self, locator, timeout=10):
         try:
             element = WebDriverWait(timeout=timeout, driver=self.driver).until(
                 EC.presence_of_element_located(locator)
             )
             return element
-        except (NoSuchElementException, TimeoutException) as err:
-            print(err.msg)
+        except (NoSuchElementException, TimeoutException):
+            self.driver.save_screenshot(BASE_DIR
+                                        / f'screenshots/rozetka/{self.driver.current_url}.png')
             self.driver.quit()
 
-    def elements_are_present(self, locator, timeout=5):
+    def elements_are_present(self, locator, timeout=10):
         try:
             elements = WebDriverWait(self.driver, timeout).until(
                 EC.presence_of_all_elements_located(locator)
             )
             return elements
-        except (NoSuchElementException, TimeoutException) as err:
-            print(err.msg)
+        except (NoSuchElementException, TimeoutException):
+            self.driver.save_screenshot(BASE_DIR
+                                        / f'screenshots/rozetka/{self.driver.current_url}.png')
             self.driver.quit()
 
     def element_is_visible(self, locator, timeout=10):
@@ -40,18 +45,20 @@ class BasePage:
                 EC.visibility_of_element_located(locator)
             )
             return element
-        except (NoSuchElementException, TimeoutException) as err:
-            self.driver.save_screenshot(f"{self.driver.current_url}.png")
-            self.driver.close()
+        except (NoSuchElementException, TimeoutException):
+            self.driver.save_screenshot(BASE_DIR
+                                        / f'screenshots/rozetka/{self.driver.current_url}.png')
+            self.driver.quit()
 
-    def elements_are_visible(self, locator, timeout=5):
+    def elements_are_visible(self, locator, timeout=10):
         try:
             element = WebDriverWait(self.driver, timeout).until(
                 EC.visibility_of_all_elements_located(locator)
             )
             return element
-        except (NoSuchElementException, TimeoutException) as err:
-            print(err.msg)
+        except (NoSuchElementException, TimeoutException):
+            self.driver.save_screenshot(BASE_DIR
+                                        / f'screenshots/rozetka/{self.driver.current_url}.png')
             self.driver.quit()
 
     def element_is_not_visible(self, locator, timeout=5):
@@ -60,22 +67,20 @@ class BasePage:
                 EC.invisibility_of_element_located(locator)
             )
             return element
-        except (NoSuchElementException, TimeoutException) as err:
-            print(err.msg)
+        except (NoSuchElementException, TimeoutException):
+            self.driver.save_screenshot(BASE_DIR
+                                        / f'screenshots/rozetka/{self.driver.current_url}.png')
             self.driver.quit()
 
-    def element_is_clickable(self, locator, timeout=5):
+    def element_is_clickable(self, locator, timeout=10):
         try:
             element = WebDriverWait(self.driver, timeout).until(
                 EC.element_to_be_clickable(locator)
             )
             return element
-        except (NoSuchElementException, TimeoutException) as err:
-            print(err.msg)
+        except (NoSuchElementException, TimeoutException):
+            self.driver.save_screenshot(BASE_DIR
+                                        / f'screenshots/rozetka/{self.driver.current_url}.png')
             self.driver.quit()
 
-    def move_to_element(self, element):  #
-        self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
-    def get_element_on_focus(self, element):
-        self.driver.execute_script("arguments[0].focus();", element)
