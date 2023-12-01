@@ -21,7 +21,7 @@ class BasePage:
         options.add_argument("--disable-notifications")
         if self.headless:
             options.add_argument("--headless")
-        return Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+        return Chrome(options=options)
 
     def firefox_driver(self):
         options = FirefoxOptions()

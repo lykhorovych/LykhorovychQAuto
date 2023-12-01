@@ -41,7 +41,7 @@ jobs:
         run: pytest --headless true
       - name: rztk tests
         if: "github.event.inputs.deployment_target == 'rztk'"
-        run: pytest -m rztk --headless true
+        run: pytest -m rztk --headless true -v -s
       - name: amazon tests
         if: "github.event.inputs.deployment_target == 'amazon'"
         run: pytest -m amazon --headless true
