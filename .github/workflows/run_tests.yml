@@ -6,7 +6,7 @@ on:
       deployment_target:
         description: Choose target
         required: true
-        default: rozetka
+        default: rztk
         type: choice
         options:
           - all
@@ -31,7 +31,7 @@ jobs:
       - name: setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.13"
+          python-version: "3.12"
       - name: Install Chrome
         run: sudo apt-get install google-chrome-stable
       - name: install dependencies
