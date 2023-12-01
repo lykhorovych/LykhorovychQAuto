@@ -34,7 +34,7 @@ def user():
 
 
 def pytest_addoption(parser):
-    parser.addoption("--headless", action="store", default='false', help="")
+    parser.addoption("--headless", action="store", default='true', help="")
     parser.addoption("--browser", action="store", default='chrome',
                      help="""'chrome' - for Chrome browser
                              'firefox' - for Mozilla Firefox browser
