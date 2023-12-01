@@ -11,9 +11,8 @@ from selenium.webdriver.common.keys import Keys
 
 class BasePage:
 
-    def __init__(self, browser, url, headless=False):
+    def __init__(self, browser, headless=False):
         self.browser = browser
-        self.url = url
         self.headless = headless
         self.driver = self.select_driver()
 
@@ -21,14 +20,14 @@ class BasePage:
         options = ChromeOptions()
         options.add_argument("--disable-notifications")
         if self.headless:
-            options.headless = True
+            options.add_argument("--headless")
         return Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
     def firefox_driver(self):
         options = FirefoxOptions()
         options.add_argument("--disable-notifications")
         if self.headless:
-            options.headless = True
+            options.add_argument("--headless")
 
         return Firefox(service=FirefoxService(), options=options)
 
