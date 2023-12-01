@@ -4,7 +4,7 @@ from modules.ui.page_objects.rozetka.base_page import BasePage
 from modules.ui.page_objects.rozetka.locators import BasketPageLocators
 from modules.ui.page_objects.rozetka.undetected import UndetectedDriver
 
-class RozetkaPage(UndetectedDriver, BasePage):
+class RozetkaPage(BasePage):
     URL = "https://rozetka.com.ua/ua"
 
     def open(self):
