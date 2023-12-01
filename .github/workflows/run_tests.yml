@@ -1,0 +1,56 @@
+name: Automated tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      deployment_target:
+        description: Choose target
+        required: true
+        default: rozetka
+        type: choice
+        options:
+          - all
+          - rztk
+          - nova_poshta
+          - github
+          - api
+          - amazon
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: setup Python
+        uses: actions/setup-python@v4
+        with:
+          pytho-version: "3.13"
+      - name: Install Chrome
+        run: sudo apt-get install google-chrome-stable
+      - name: install dependencies
+        run: pip install -r requirements.txt
+      - name: Run all tests
+        run: pytest
+      - name: rztk tests
+        if: "github.event.inputs.deployment_target == 'rztk'"
+        run: pytest -m rztk
+      - name: amazon tests
+        if: "github.event.inputs.deployment_target == 'amazon'"
+        run: pytest -m amazon
+      - name: nova_poshta tests
+        if: "github.event.inputs.deployment_target == 'nova_poshta'"
+        run: pytest -m amazon
+      - name: github
+        if: "github.event.inputs.deployment_target == 'github'"
+        run: pytest -m github
+      - name: api tests
+        if: "github.event.inputs.deployment_target == 'api'"
+        run: pytest -m api
+
