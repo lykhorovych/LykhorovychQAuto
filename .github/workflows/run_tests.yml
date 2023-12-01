@@ -37,6 +37,7 @@ jobs:
       - name: install dependencies
         run: pip install -r requirements.txt
       - name: Run all tests
+        if: "github.action.inputs.deployment_target == 'all'"
         run: pytest
       - name: rztk tests
         if: "github.event.inputs.deployment_target == 'rztk'"
