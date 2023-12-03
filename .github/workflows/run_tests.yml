@@ -36,22 +36,19 @@ jobs:
         run: sudo apt-get install google-chrome-stable
       - name: install dependencies
         run: pip install -r requirements.txt
-      - name: Run all tests
-        if: "github.action.inputs.deployment_target == 'all'"
-        run: pytest --headless true
       - name: rztk tests
         if: "github.event.inputs.deployment_target == 'rztk'"
-        run: pytest -m rztk --headless true -v -s
+        run: pytest -m rztk --headless true -v
       - name: amazon tests
         if: "github.event.inputs.deployment_target == 'amazon'"
-        run: pytest -m amazon --headless true
+        run: pytest -m amazon --headless true -v
       - name: nova_poshta tests
         if: "github.event.inputs.deployment_target == 'nova_poshta'"
-        run: pytest -m nova_poshta --headless true
+        run: pytest -m nova_poshta --headless true -v
       - name: github
         if: "github.event.inputs.deployment_target == 'github'"
-        run: pytest -m github --headless true
+        run: pytest -m github -v
       - name: api tests
         if: "github.event.inputs.deployment_target == 'api'"
-        run: pytest -m api --headless true
+        run: pytest -m api -v
 

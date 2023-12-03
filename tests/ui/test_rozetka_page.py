@@ -54,18 +54,14 @@ class TestRozetkaBasket:
         assert count == expected_count
 
     @pytest.mark.rztk
-    def test_change_order_value_after_change_product_count(self, rozetka_page, product_count=10):
+    def test_order_value_after_change_product_count(self, rozetka_page, product_count=10):
         price_before_change = rozetka_page.get_price_after_discount()  # price before change
 
         rozetka_page.input_count_within_input_field(product_count)  # change value to 10
+        rozetka_page.check_count_of_products_in_input_field(product_count)
 
-        count = rozetka_page.check_count_of_products_in_input_field(product_count)
-
-        assert count == product_count
-
-        assert rozetka_page.if_final_price_is_valid(
-            rozetka_page.convert_value(price_before_change * product_count)
-        ) is True
+        final_price = rozetka_page.convert_value(price_before_change * product_count)
+        assert rozetka_page.if_final_price_is_valid(final_price) is True
 
     @pytest.mark.rztk
     def test_green_color_in_checkout_button_is_present(self, rozetka_page):

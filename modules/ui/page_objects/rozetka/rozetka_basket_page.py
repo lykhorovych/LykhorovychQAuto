@@ -4,7 +4,7 @@ from modules.ui.page_objects.rozetka.base_page import BasePage
 from modules.ui.page_objects.rozetka.locators import BasketPageLocators
 from modules.ui.page_objects.rozetka.undetected import UndetectedDriver
 
-class RozetkaPage(BasePage):
+class RozetkaPage(UndetectedDriver, BasePage):
     URL = "https://rozetka.com.ua/ua"
 
     def open(self):
@@ -54,12 +54,14 @@ class RozetkaPage(BasePage):
         return price
 
     def add_count_of_product(self, clicks):
+        btn = self.element_is_clickable(BasketPageLocators.PLUS_BUTTON)
         for _ in range(clicks):
-            self.element_is_clickable(BasketPageLocators.PLUS_BUTTON).click()
+            self.element_is_clickable(btn).click()
 
     def decries_count_of_product(self, clicks):
+        btn = self.element_is_clickable(BasketPageLocators.MINUS_BUTTON)
         for _ in range(clicks):
-            self.element_is_clickable(BasketPageLocators.MINUS_BUTTON).click()
+            self.element_is_clickable(btn).click()
 
     def input_count_within_input_field(self, value):
         input_elem = self.element_is_visible(BasketPageLocators.INPUT_FIELD)
@@ -83,8 +85,8 @@ class RozetkaPage(BasePage):
         return order_price
 
     def if_final_price_is_valid(self, value):
-        order_price = self.text_is_present_in_element(BasketPageLocators.FINAL_PRICE,
-                                               value)
+
+        order_price = self.text_is_present_in_element(BasketPageLocators.FINAL_PRICE, value)
         return order_price
 
     def delete_product_from_cart(self):

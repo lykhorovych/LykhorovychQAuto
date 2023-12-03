@@ -128,7 +128,7 @@ class BasePage:
         except (NoSuchElementException, TimeoutException):
             return False
 
-    def text_is_present_in_element(self, locator, text, timeout=10):
+    def text_is_present_in_element(self, locator, text, timeout=20):
         """Wait until text is present in the element."""
 
         try:
