@@ -21,7 +21,7 @@ class BasePage:
         options.add_argument("--disable-notifications")
         if self.headless:
             options.add_argument("--headless")
-        return Chrome(options=options)
+        return Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
     def firefox_driver(self):
         options = FirefoxOptions()
@@ -51,6 +51,7 @@ class BasePage:
 
     def open(self, url):
         self.driver.get(url)
+        self.driver.implicitly_wait(5)
         self.driver.maximize_window()
 
     def close(self):
@@ -98,7 +99,7 @@ class BasePage:
                 EC.invisibility_of_element_located(locator)
             )
             return element
-        except (NoSuchElementException, TimeoutException):
+        except TimeoutException:
             return False
 
     def element_is_clickable(self, locator, timeout=30):
@@ -122,17 +123,39 @@ class BasePage:
             element = WebDriverWait(self.driver, timeout).until(EC.text_to_be_present_in_element_attribute(
                 locator=locator,
                 attribute_=attribute,
-                text_=text))
+                text_=str(text)))
             return element
         except (NoSuchElementException, TimeoutException):
             return False
 
-    def text_in_element_is_present(self, locator, text, timeout=10):
+    def text_is_present_in_element(self, locator, text, timeout=10):
+        """Wait until text is present in the element."""
+
         try:
-            element = WebDriverWait(self.driver, timeout).until(EC.text_to_be_present_in_element(
+            state = WebDriverWait(self.driver, timeout).until(EC.text_to_be_present_in_element(
                 locator=locator,
-                text_=text))
-            return element
+                text_=str(text)))
+            return state
+        except (NoSuchElementException, TimeoutException):
+            return False
+
+    def value_is_present_in_element(self, locator, text, timeout=10):
+        """Wait until some text value is not to be present in the element attribute 'value'."""
+
+        try:
+            state = WebDriverWait(self.driver, timeout).until(
+                EC.text_to_be_present_in_element_value(locator, text_=str(text)))
+            return self.driver.find_element(*locator) if state else False
+        except (NoSuchElementException, TimeoutException):
+            return False
+
+    def value_of_attribute_is_present_in_element(self, locator, attribute, text, timeout=10):
+        """Wait until some text value is not present in the element attribute."""
+
+        try:
+            state = WebDriverWait(self.driver, timeout).until(EC.text_to_be_present_in_element_attribute(
+                locator, attribute, text))
+            return self.driver.find_element(*locator) if state else False
         except (NoSuchElementException, TimeoutException):
             return False
 
@@ -144,7 +167,11 @@ class BasePage:
 
     @staticmethod
     def get_attribute_value(element, attribute):
-        element.get_attribute(attribute)
+        return element.get_attribute(attribute)
+
+    @staticmethod
+    def get_value_of_css_property(element, css_property):
+        return element.value_of_css_property(css_property)
 
     def click_on_btn(self, element):
         self.driver.execute_script("arguments[0].click();", element)
