@@ -9,7 +9,6 @@ on:
         default: rztk
         type: choice
         options:
-          - all
           - rztk
           - nova_poshta
           - github
