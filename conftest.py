@@ -1,5 +1,6 @@
 import pytest
 import os.path
+import logging
 
 from modules.api.clients.github import GitHub
 from modules.common.database import DataBase
@@ -8,6 +9,8 @@ from modules.ui.page_objects.rozetka.rozetka_basket_page import RozetkaPage
 from modules.ui.page_objects.nova_poshta.nova_poshta_trecking_page import NovaPoshtaTrackingPage
 from modules.common.readconfig import ReadConfig
 
+BASE_DIR = ReadConfig.get_base_dir()
+logging.basicConfig(level=logging.ERROR, filename=BASE_DIR / "logs" / "py_log.log", filemode="w")
 
 class User:
     def __init__(self) -> None:
@@ -113,10 +116,10 @@ def pytest_runtest_makereport(item, call):
     report = outcome.get_result()
 
     if report.when == 'call' and report.failed:
-            driver = (item.funcargs['rozetka_page'] or
-                      item.funcargs['amazon_page'] or
-                      item.funcargs['nova_poshta_page'] or
-                      item.funcargs['database_api'])
-            folder = "_".join(item.fixturenames[0].split("_")[:-1])
-            driver.driver.save_screenshot(os.path.join(ReadConfig.get_base_dir(),
-                                                       f'screenshots\\{folder}\\', item.name + '.png'))
+        folder = "_".join(item.fixturenames[0].split("_")[:-1])
+        driver_fix = {'rozetka_page', 'amazon_page', 'nova_poshta_page'}.intersection(item.fixturenames)
+        if driver_fix:
+            driver = item.funcargs[driver_fix.pop()]
+            driver.driver.save_screenshot(os.path.join(BASE_DIR, f'screenshots\\{folder}\\',
+                                                       item.name + '.png'))
+        logging.error(f"{item.reportinfo()[2]}:{call.excinfo}")

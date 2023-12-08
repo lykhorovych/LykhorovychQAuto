@@ -1,3 +1,5 @@
+  name: database api
+
   on:
     push
 
