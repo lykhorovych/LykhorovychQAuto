@@ -1,0 +1,7 @@
+ERROR:root:test_user_exists:<ExceptionInfo KeyError('login') tblen=16>
+ERROR:root:test_user_not_exists:<ExceptionInfo AssertionError("assert 'API rate lim...ore details.)' == 'Not Found'\n  - Not Found\n  + API rate limit exceeded for 2... here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)") tblen=16>
+ERROR:root:test_repo_can_be_found:<ExceptionInfo AssertionError('assert 54 == 50') tblen=16>
+ERROR:root:test_get_emojis:<ExceptionInfo AssertionError('The expected status code is 200, but 403 was received.\nassert 403 == 200') tblen=16>
+ERROR:root:test_list_repo_commits_exists:<ExceptionInfo AssertionError('The expected status code is 200, but 403 was received.\nassert 403 == 200') tblen=16>
+ERROR:root:test_list_repo_commits_cannot_be_found:<ExceptionInfo AssertionError('The expected status code is 404, but 403 was received.\nassert 403 == 404') tblen=16>
+ERROR:root:test_list_repo_languages:<ExceptionInfo AssertionError('The expected status code is 200, but 403 was received.\nassert 403 == 200') tblen=16>
