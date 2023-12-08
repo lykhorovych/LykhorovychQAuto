@@ -68,21 +68,6 @@ def database_api():
 
     api.close()
 
-
-@pytest.hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_runtest_makereport(item, call):
-    outcome = yield
-    report = outcome.get_result()
-
-    if report.when == 'call' and report.failed:
-            driver = (item.funcargs['rozetka_page'] or
-                      item.funcargs['amazon_page'] or
-                      item.funcargs['nova_poshta_page'])
-            folder = "_".join(item.fixturenames[0].split("_")[:-1])
-            driver.driver.save_screenshot(os.path.join(ReadConfig.get_base_dir(),
-                                                       f'screenshots\\{folder}\\', item.name + '.png'))
-
-
 @pytest.fixture(scope='module')
 def amazon_page():
     page = AmazonStartPage()
@@ -121,3 +106,17 @@ def nova_poshta_page():
     yield page
 
     page.close()
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+
+    if report.when == 'call' and report.failed:
+            driver = (item.funcargs['rozetka_page'] or
+                      item.funcargs['amazon_page'] or
+                      item.funcargs['nova_poshta_page'] or
+                      item.funcargs['database_api'])
+            folder = "_".join(item.fixturenames[0].split("_")[:-1])
+            driver.driver.save_screenshot(os.path.join(ReadConfig.get_base_dir(),
+                                                       f'screenshots\\{folder}\\', item.name + '.png'))
