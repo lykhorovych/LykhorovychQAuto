@@ -108,6 +108,8 @@ class TestDataBase:
             )
         except sqlite3.ProgrammingError as err:
             assert err.args[0] == error_message
+        except sqlite3.InterfaceError as err:
+            assert err.args[0] == "Error binding parameter 3 - probably unsupported type."
         finally:
             product = database_api.select_product_by_id(product_id=4)
             assert product[0][3] == 30
@@ -120,6 +122,8 @@ class TestDataBase:
             )
         except sqlite3.ProgrammingError as err:
             assert err.args[0] == "Error binding parameter 2: type 'list' is not supported"
+        except sqlite3.InterfaceError as err:
+            assert err.args[0] == "Error binding parameter 1 - probably unsupported type."
         finally:
             product = database_api.select_product_by_id(product_id=4)
             assert product[0][1] == 'печиво'
@@ -132,6 +136,8 @@ class TestDataBase:
             )
         except sqlite3.ProgrammingError as err:
             assert err.args[0] == "Error binding parameter 3: type 'list' is not supported"
+        except sqlite3.InterfaceError as err:
+            assert err.args[0] == "Error binding parameter 1 - probably unsupported type."
         finally:
             product = database_api.select_product_by_id(product_id=4)
             assert product[0][2] == 'солодке'
@@ -151,6 +157,8 @@ class TestDataBase:
             database_api.update_product_qnt_by_id(product_id=1, qnt=quantity)
         except sqlite3.ProgrammingError as err:
             assert err.args[0] == error_message
+        except sqlite3.IntegrityError as err:
+            assert err.args[0] == "Error binding parameter 0 - probably unsupported type."
         finally:
             water_qnt = database_api.select_product_qnt_by_id(product_id=1)
 
@@ -178,6 +186,8 @@ class TestDataBase:
             database_api.update_customer_postalCode_by_name(name='Sergii', postal_code=postal_code)
         except sqlite3.ProgrammingError as err:
             assert err.args[0] == error_message
+        except sqlite3.IntegrityError as err:
+            assert err.args[0] == "Error binding parameter 0 - probably unsupported type."
         finally:
             user = database_api.get_user_address_by_name(name='Sergii')
             assert user[0][2] == '3127'
