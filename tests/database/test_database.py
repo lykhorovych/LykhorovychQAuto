@@ -137,7 +137,7 @@ class TestDataBase:
         except sqlite3.ProgrammingError as err:
             assert err.args[0] == "Error binding parameter 3: type 'list' is not supported"
         except sqlite3.InterfaceError as err:
-            assert err.args[0] == "Error binding parameter 1 - probably unsupported type."
+            assert err.args[0] == "Error binding parameter 2 - probably unsupported type."
         finally:
             product = database_api.select_product_by_id(product_id=4)
             assert product[0][2] == 'солодке'
