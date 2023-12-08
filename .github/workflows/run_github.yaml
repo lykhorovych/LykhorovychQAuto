@@ -1,0 +1,22 @@
+  name: github
+
+  on:
+    push
+
+  jobs:
+    gitHub_api_tests:
+
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: add checkout
+          uses: actions/checkout@v3
+        - name: add python
+          uses: actions/setup-python@v4
+          with:
+            python-version: "3.10"
+        - name: add requirements
+          run: pip install -r requirements.txt
+        - name: github tests
+          run: pytest tests -m api
+
