@@ -113,8 +113,8 @@ class BasePage:
 
     def title_is_contains(self, title, timeout=30):
         try:
-            title = WebDriverWait(self.driver, timeout).until(EC.title_contains(title))
-            return title
+            state = WebDriverWait(self.driver, timeout).until(EC.title_contains(title))
+            return state
         except (NoSuchElementException, TimeoutException):
             return False
 

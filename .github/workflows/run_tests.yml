@@ -9,7 +9,6 @@ on:
         default: rztk
         type: choice
         options:
-          - all
           - rztk
           - nova_poshta
           - github
@@ -38,17 +37,17 @@ jobs:
         run: pip install -r requirements.txt
       - name: rztk tests
         if: "github.event.inputs.deployment_target == 'rztk'"
-        run: pytest -m rztk --headless true -v
+        run: pytest -m rztk --headless true
       - name: amazon tests
         if: "github.event.inputs.deployment_target == 'amazon'"
-        run: pytest -m amazon --headless true -v
+        run: pytest -m amazon --headless true
       - name: nova_poshta tests
         if: "github.event.inputs.deployment_target == 'nova_poshta'"
-        run: pytest -m nova_poshta --headless true -v
+        run: pytest -m nova_poshta --headless true
       - name: github
         if: "github.event.inputs.deployment_target == 'github'"
-        run: pytest -m github -v
+        run: pytest -m github
       - name: api tests
         if: "github.event.inputs.deployment_target == 'api'"
-        run: pytest -m api -v
+        run: pytest -m api
 
