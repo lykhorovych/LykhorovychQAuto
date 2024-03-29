@@ -12,7 +12,9 @@ BASE_DIR = ReadConfig.get_base_dir()
 
 class BasePage:
     def __init__(self) -> None:
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        options = webdriver.ChromeOptions()
+        options.add_argument("--headless=new")
+        self.driver = webdriver.Chrome(options=options)
 
     def close(self):
         self.driver.close()
